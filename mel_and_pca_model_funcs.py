@@ -1,9 +1,12 @@
 import numpy as np
-from keras.utils import Sequence
-from keras.applications.mobilenetv2 import MobileNetV2
-from keras.layers import Input, BatchNormalization, Conv2D, Dense, GlobalAveragePooling2D, concatenate
-from keras.models import Model
-from keras.optimizers import Adam
+import sys
+sys.path.insert(0,'/projects/MuseTek/packages')
+import keras
+from keras.keras.utils import Sequence
+from keras.keras.applications.mobilenetv2 import MobileNetV2
+from keras.keras.layers import Input, BatchNormalization, Conv2D, Dense, GlobalAveragePooling2D, concatenate
+from keras.keras.models import Model
+from keras.keras.optimizers import Adam
 from utils import uni_len
 
 

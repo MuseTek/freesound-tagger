@@ -50,7 +50,7 @@ def get_mel_and_pca(filename, sample_rate=44100):
     x_pca_feat = sc.transform(x_feats) 
     x_pca_feat = pca.transform(x_pca_feat)
     x_pca_feat = x_pca_feat[:,:350]
-    pdb.set_trace()
+    #pdb.set_trace()
     return {'mel':logmel, 'pca':x_pca_feat}
 
 def create_model():
@@ -82,7 +82,10 @@ def get_tags(filepath):
     labels = list(sorted(list(set(labels))))
     top_3 = np.array(labels)[np.argsort(-prediction, axis=1)[:, :3]]
     predicted_labels = [' '.join(list(x)) for x in top_3]
+    #print(predicted_labels)
     return predicted_labels
+
+#get_tags('/hdd0/datasets/MuseTek/Data/Landr copy/Adrien Fertier_Lo-fi Rock/synth_note_piano_C2.wav.mp3')
     # print(labels[np.argmax(prediction)])
 #def main(args):
  #   weights = args.weights
@@ -103,7 +106,7 @@ def get_tags(filepath):
     #print("hello")
     #print(prediction)
 
-if __name__=='__main__':
+#if __name__=='__main__':
     #import argparse
     #parser = argparse.ArgumentParser(description="predicts which class file(s) belong(s) to")
     #parser.add_argument('-w', '--weights', #nargs=1, type=argparse.FileType('r'),
@@ -112,7 +115,7 @@ if __name__=='__main__':
     #args = parser.parse_args()
     #print("hello")
     #main(args)
-    tags = get_tags('/hdd0/datasets/MuseTek/Data/Landr copy/Adrien Fertier_Lo-fi Rock/synth_note_piano_C2.wav.mp3')
+    #tags = get_tags('/hdd0/datasets/MuseTek/Data/Landr copy/Adrien Fertier_Lo-fi Rock/synth_note_piano_C2.wav.mp3')
 
 
     

@@ -4,7 +4,7 @@ import pandas as pd
 from scipy.stats import skew
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn import linear_model
-
+import pdb
 sr = 44100
 
 
@@ -268,20 +268,37 @@ def feat_set_3(x):
     ans2 = (lambda x: x[np.arange(0, len(x), 40)])(np.array(runningMeanFast(m)))
     return np.concatenate((ans1, ans2))
 
-
+def all_feats_np(x):
+    try:
+        stft = np.abs(librosa.stft(x))
+        out1 = feat_set_1(x, stft=stft)
+        out2 = feat_set_2(x)
+        out3 = feat_set_3(x)
+        out4 = feat_set_4(x)
+        assert out1.shape[0] == 985
+        assert out2.shape[0] == 12
+        assert out3.shape[0] == 64
+        assert out4.shape[0] == 72
+        return np.concatenate((out1, out2, out3, out4))
+    except:
+        return None
 def all_feats(filename):
-    x = np.load(filename)
-    stft = np.abs(librosa.stft(x))
-    out1 = feat_set_1(x, stft=stft)
-    out2 = feat_set_2(x)
-    out3 = feat_set_3(x)
-    out4 = feat_set_4(x)
+    try:
+        x = np.load(filename)
+        stft = np.abs(librosa.stft(x))
+        out1 = feat_set_1(x, stft=stft)
+        out2 = feat_set_2(x)
+        out3 = feat_set_3(x)
+        out4 = feat_set_4(x)
 
-    assert out1.shape[0] == 985
-    assert out2.shape[0] == 12
-    assert out3.shape[0] == 64
-    assert out4.shape[0] == 72
+        assert out1.shape[0] == 985
+        assert out2.shape[0] == 12
+        assert out3.shape[0] == 64
+        assert out4.shape[0] == 72
 
-    return np.concatenate((
-        out1, out2, out3, out4
-    ))
+        return np.concatenate((
+            out1, out2, out3, out4
+        ))
+    except:
+        pdb.set_trace()	
+        return
